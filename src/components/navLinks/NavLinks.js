@@ -23,10 +23,10 @@ function NavLinks () {
                     <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
                     <Nav.Link as={Link} to="/login">Login/Register</Nav.Link>
                     <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/aaaa">Action</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/baaa">Actionb</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item as={Link} to="/caaa">Actionc</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/aaaa">Action</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/baaa">Actionb</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item as={Link} to="/caaa">Actionc</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 </Navbar.Collapse>                

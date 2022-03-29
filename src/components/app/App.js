@@ -7,7 +7,7 @@ function App() {
   return (
     <React.Fragment>     
       <Router>
-      <NavLinks/>
+        <NavLinks/>
         <AppRoutes/>
       </Router>
     </React.Fragment> 
