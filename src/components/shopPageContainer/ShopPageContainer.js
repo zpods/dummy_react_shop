@@ -18,7 +18,7 @@ function ShopPageContainer (){
     }
 
     if(isLoading){
-        <MessageComponent message={message}/>
+        return <MessageComponent message={message}/>
     }else{
         return (<ShopPage products={products}/>);
     }
