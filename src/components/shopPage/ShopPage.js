@@ -1,10 +1,25 @@
 import React from 'react';
-import { Row, Container } from 'react-bootstrap';
+import { Row, Container, Card } from 'react-bootstrap';
 import JumbotronElement from '../jumbotronElement/JumbotronElement';
 import Product from '../product/Product';
+import MessageComponent from '../../messageComponent/MessageComponent';
 
 
 function ShopPage({products}) {
+
+    const message = {
+        title: 'Error Message',
+        text: 'NO PRODUCT FOUND'
+    }
+
+    if(Array.isArray(products) && products.length === 0){
+        return (
+            <React.Fragment>
+                <JumbotronElement/>
+                <MessageComponent message={message}/>
+            </React.Fragment>            
+        )
+    }
     return (
         <React.Fragment>
             {console.log(products)}
