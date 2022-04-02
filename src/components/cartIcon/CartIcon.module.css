@@ -1,0 +1,16 @@
+/*cart styles */
+
+.cart {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    color: chocolate;
+    font-size: 1.1rem;
+    padding: 4px;
+    font-weight: 700;
+    width: 50%;
+    text-align: center;
+}
+.parentCart {
+    position: relative;
+}

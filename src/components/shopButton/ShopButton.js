@@ -2,11 +2,10 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 function ShopButton (props){
-    const id = props.id;
-    const buttonText = props.buttonText;
+    const { buttonText, onClick } = props;
 
     return (
-        <div id={id} className="mx-1">
+        <div onClick={onClick} className="mx-1">
             <Button type="button" size="sm" variant="outline-secondary">{ buttonText }</Button>
         </div>
     )

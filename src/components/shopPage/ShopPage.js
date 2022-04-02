@@ -22,7 +22,6 @@ function ShopPage({products}) {
     }
     return (
         <React.Fragment>
-            {console.log(products)}
             <Container>
                 <JumbotronElement/>
                 <Row>                

@@ -17,8 +17,52 @@ export const mainShopPageSlice = createSlice({
     products: [],
     isLoading: true,
     error: [],
+    cart: [],
   },
   reducers: {
+    addProductToCart(state, action){
+        const product = action.payload;
+        const productsInCart = state.cart;
+        let found = false;
+
+        for(const [key, value] of Object.entries(productsInCart)){
+          if(value.product.id === product.id){
+            found = true;
+            break;
+          }         
+        }
+
+        if(!found){
+          return {
+            ...state,
+            cart: {
+              ...state.cart,
+              [product.id] : {
+                product: {
+                  ...product,
+                    inCart: 1,
+                    inStock: product.inStock - 1
+                }
+              }
+            }
+          }
+        }else{
+          return {
+            ...state,
+            cart: {
+              ...state.cart,
+              [product.id]: {
+                product: {
+                  ...product,
+                  inCart: state.cart[product.id].product.inCart + 1,
+                  inStock: state.cart[product.id].product.inStock - 1
+                }
+              }
+            }
+          }
+        }
+          
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
@@ -33,5 +77,6 @@ export const mainShopPageSlice = createSlice({
   },
 })
 
+export const { addProductToCart } = mainShopPageSlice.actions;
 
 export default mainShopPageSlice.reducer

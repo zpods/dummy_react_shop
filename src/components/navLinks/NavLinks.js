@@ -8,7 +8,7 @@ import {
     FormControl, 
     Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import CartIcon from "../../cartIcon/CartIcon";
+import CartIcon from "../cartIcon/CartIcon";
 
 function NavLinks () {
     return (
