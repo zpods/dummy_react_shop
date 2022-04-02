@@ -1,3 +1,6 @@
-body {
-    overflow-y: hidden;
-}
+::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    scrollbar-width: none;
+  }
