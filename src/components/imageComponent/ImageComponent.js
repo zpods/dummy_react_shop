@@ -1,8 +1,12 @@
 import React from 'react';
+import Price from '../priceComponent/PriceComponent';
+import styles from './imageComponent.module.css';
 
-function ImageComponent ({image}) {
+function ImageComponent ({image, price}) {
 
     let productImage = {};
+    const style = styles.imagePosPrice;
+
     if(image){
         productImage = {
             'data-src': productImage.dataSrc,
@@ -22,14 +26,18 @@ function ImageComponent ({image}) {
     }
 
     return(
-        <img 
-            className="card-img-top" 
-            data-src={productImage.dataSrc} 
-            alt={productImage.alt} 
-            style={productImage.style} 
-            src={productImage.src} 
-            data-holder-rendered={productImage.dataHolderRendered} 
-        />
+        <React.Fragment>
+            <Price price={price}/>
+            <img 
+                className={ style + ' card-img-top'} 
+                data-src={productImage.dataSrc} 
+                alt={productImage.alt} 
+                style={productImage.style} 
+                src={productImage.src} 
+                data-holder-rendered={productImage.dataHolderRendered} 
+            />
+        </React.Fragment>
+       
     );
 }
 export default ImageComponent;
