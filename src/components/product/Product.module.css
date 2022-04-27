@@ -1,0 +1,10 @@
+.description {
+    height: 180px;
+    overflow-y: scroll !important;
+}
+
+@media screen and (min-width: 1200px){
+    .description {
+        height: 130px;
+    }
+}

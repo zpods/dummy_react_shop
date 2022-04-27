@@ -1,17 +1,43 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchMainPageProducts } from '../../../axiosCalls/axiosCalls'
-import { current } from 'immer';
+import axios from 'axios';
 
-const  temp_products = fetchMainPageProducts();
+//const  temp_products = fetchMainPageProducts();
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/api/products",
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+});
+
+
 export const fetchProducts = createAsyncThunk(
   'mainShopPage/fetchProducts',
     async () => {
-      const response = await temp_products;
-      return response;
+      const response = await api();
+      console.log(response);
+      return response.data;
     }
   )
 
+export const setTotalPriceAndQuantity = (state) => {
+  let cart = [];
 
+  if(typeof state === 'undefined'){
+    return;
+  }
+  if(typeof state.singleProductCart === 'undefined' || state.singleProductCart.length === 0){
+    cart = state.cart;
+  }else{
+    cart = state.singleProductCart;
+  }
+  
+  state.totalQuantity = cart.reduce((result, item)=>result + item.inCart,0)
+  state.totalPrice = cart.reduce((result, item)=>result + item.price * item.inCart,0)
+}
+  
 export const mainShopPageSlice = createSlice({
   name: 'mainShopPage',
   initialState: {
@@ -19,65 +45,58 @@ export const mainShopPageSlice = createSlice({
     isLoading: true,
     error: [],
     cart: [],
+    singleProductCart: [],
+    totalPrice: 0,
+    totalQuantity: 0,   
   },
   reducers: {
     addProductToCart(state, action){
       const product = action.payload;
+      let index = null;
       const productsInCart = state.cart;
       let found = false;
 
-      for(const [key, value] of Object.entries(productsInCart)){
-        if(value.product.id === product.id){
+      productsInCart.find((item, key) => {
+        index = key;
+        if(item.id === product.id){
           found = true;
-          break;
         }         
-      }
+        return found;
+      })
 
-      if(!found){
-        return {
-          ...state,
-          cart: {
-            ...state.cart,
-            [product.id] : {
-              product: {
-                ...product,
-                  inCart: 1,
-                  inStock: product.inStock - 1
-              }
-            }
-          }
-        }
+      if(found){
+        const varInStock = state.cart[index].inStock;
+        const varInCart = state.cart[index].inCart;
+        state.cart[index] = {...product, inStock: varInStock - 1, inCart: varInCart + 1};
+        setTotalPriceAndQuantity(state);        
       }else{
-        return {
-          ...state,
-          cart: {
-            ...state.cart,
-            [product.id]: {
-              product: {
-                ...product,
-                inCart: state.cart[product.id].product.inCart + 1,
-                inStock: state.cart[product.id].product.inStock - 1
-              }
-            }
-          }
-        }
+        const varInStock = product.inStock;
+        state.cart.push({...product, inStock: varInStock - 1, inCart: 1});
+        setTotalPriceAndQuantity(state);
       }       
     },
     buySingleProduct(state, action){
-      const product = action.payload;
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          [product.id]: {
-            product: {
-              ...product, 
-              inCart: 1,
-              inStock: product.inStock - 1
-            }
-          }
-        }
-      }
+      state.singleProductCart = [];
+      const product = action.payload; 
+      const products = state.products;
+      let index = null;
+
+      products.find((item, key) => {
+        index = key;
+        if(item.id === product.id){
+          const varInStock = state.products[index].inStock;
+          state.products[index] = {...product, inStock: varInStock - 1};
+        }         
+      })
+
+      state.singleProductCart.push({...product, inCart: 1});
+      setTotalPriceAndQuantity(state);      
+    },
+    clearCart(state, action){
+      state.singleProductCart = [];
+      state.cart = [];
+      state.totalPrice = 0;
+      state.totalQuantity = 0;
     }
   },
   extraReducers: (builder) => {
@@ -93,6 +112,6 @@ export const mainShopPageSlice = createSlice({
   },
 })
 
-export const { addProductToCart, buySingleProduct } = mainShopPageSlice.actions;
+export const { addProductToCart, buySingleProduct, clearCart } = mainShopPageSlice.actions;
 
 export default mainShopPageSlice.reducer

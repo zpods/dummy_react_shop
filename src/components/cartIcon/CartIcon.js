@@ -1,27 +1,33 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
+import Cart from '../cart/Cart';
 import styles from './CartIcon.module.css';
 
 function CartIcon () {
 
-    const cart = useSelector((state) => state.mainShopPage.cart);
-    let total = null;
-    const totalProducts = () =>{
-        let innerTemp = null;
-        for(const[key, value] of Object.entries(cart)){
-            console.log(key, value);
-            innerTemp += value.product.inCart;
-        }
-        total += innerTemp;
-        return total;
-    }
+    const { totalQuantity } = useSelector((state) => state.mainShopPage);
+    const [style, setStyle] = useState( { display: 'none' } );
 
+    const handleShowCart = () => {
+        setStyle(
+              {
+               display: 'block',
+               width: '500px',
+               position: 'absolute',
+               right: '-13px',
+               top: '0px',
+            }
+        )
+    }
+    const handleHideCart = () => {
+        setStyle({display: 'none'})};
     return (
-        <div className={styles.parentCart}>
-            <div className={styles.cart}>{totalProducts()}</div>
+        <div className={styles.parentCart} onMouseEnter={() => handleShowCart()}>
+            <div className={styles.cart}>{totalQuantity}</div>
             <FontAwesomeIcon className="p-2" icon={faCartShopping} color="white" size="2xl" />
+            <Cart cartStyle={style} hideCart={() => handleHideCart()}/>
         </div>
     )
 }

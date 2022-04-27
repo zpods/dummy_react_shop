@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
+
 function ShopButton (props){
-    const { buttonText, onClick } = props;
+    const { buttonText, onClick, styleClass, variant, size } = props;
     return (
         <div onClick={onClick} className="mx-1">
-            <Button type="button" size="sm" variant="outline-secondary">{ buttonText }</Button>
+            <Button className={styleClass} type="button" size={size} variant={variant}>{ buttonText }</Button>
         </div>
     )
 }

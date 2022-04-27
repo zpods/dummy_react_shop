@@ -13,4 +13,6 @@
 }
 .parentCart {
     position: relative;
+    z-index: 101;
 }
+

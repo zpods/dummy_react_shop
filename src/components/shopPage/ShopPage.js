@@ -1,9 +1,8 @@
 import React from 'react';
-import { Row, Container, Card } from 'react-bootstrap';
+import { Row, Container } from 'react-bootstrap';
 import JumbotronElement from '../jumbotronElement/JumbotronElement';
 import Product from '../product/Product';
-import MessageComponent from '../../messageComponent/MessageComponent';
-
+import MessageComponent from '../messageComponent/MessageComponent';
 
 function ShopPage({products}) {
 
@@ -27,7 +26,7 @@ function ShopPage({products}) {
                 <Row>                
                 { products && products.map((product) => {
                     return (
-                    <div className='col-md-3' key={product.id}>
+                    <div className='col-md-6 col-lg-3 ' key={product.id}>
                         <Product product={product}/>
                     </div>
                     )
