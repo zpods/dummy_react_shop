@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-//const  temp_products = fetchMainPageProducts();
+import { current } from 'immer';
 
 const api = axios.create({
   baseURL: "http://localhost:8000/api/products",
@@ -12,31 +11,13 @@ const api = axios.create({
   },
 });
 
-
 export const fetchProducts = createAsyncThunk(
   'mainShopPage/fetchProducts',
     async () => {
       const response = await api();
-      console.log(response);
       return response.data;
     }
   )
-
-export const setTotalPriceAndQuantity = (state) => {
-  let cart = [];
-
-  if(typeof state === 'undefined'){
-    return;
-  }
-  if(typeof state.singleProductCart === 'undefined' || state.singleProductCart.length === 0){
-    cart = state.cart;
-  }else{
-    cart = state.singleProductCart;
-  }
-  
-  state.totalQuantity = cart.reduce((result, item)=>result + item.inCart,0)
-  state.totalPrice = cart.reduce((result, item)=>result + item.price * item.inCart,0)
-}
   
 export const mainShopPageSlice = createSlice({
   name: 'mainShopPage',
@@ -46,51 +27,59 @@ export const mainShopPageSlice = createSlice({
     error: [],
     cart: [],
     singleProductCart: [],
-    totalPrice: 0,
-    totalQuantity: 0,   
+    totalPrice: [],
+    totalQuantity: [],   
   },
   reducers: {
     addProductToCart(state, action){
+      let productIndex = 0;
       const product = action.payload;
-      let index = null;
-      const productsInCart = state.cart;
-      let found = false;
 
-      productsInCart.find((item, key) => {
-        index = key;
-        if(item.id === product.id){
-          found = true;
-        }         
-        return found;
-      })
-
-      if(found){
-        const varInStock = state.cart[index].inStock;
-        const varInCart = state.cart[index].inCart;
-        state.cart[index] = {...product, inStock: varInStock - 1, inCart: varInCart + 1};
-        setTotalPriceAndQuantity(state);        
+      const found = state.cart.find((item, index) => {
+      if(product.id === item.id){
+        productIndex = index;
+        return true;
+      }});
+      
+      if(found){       
+          state.cart[productIndex].instock--; 
+          state.cart[productIndex].inCart++;
+          state.totalQuantity = state.cart.reduce((result, item)=>result + item.inCart,0)
+          state.totalPrice= state.cart.reduce((result, item)=>result + item.price * item.inCart,0)
+          console.log(state.totalPrice);
       }else{
-        const varInStock = product.inStock;
-        state.cart.push({...product, inStock: varInStock - 1, inCart: 1});
-        setTotalPriceAndQuantity(state);
+        state.cart.push({  
+          id: product.id,
+          price: product.price,
+          images: product.images,
+          name: product.name,
+          updated_at: product.updated_at,
+          created_at: product.created_at,
+          description: product.description, 
+          instock: product.instock - 1 , 
+          inCart: 1
+        });
+          state.totalQuantity = state.cart.reduce((result, item)=>result + item.inCart,0)
+          state.totalPrice= state.cart.reduce((result, item)=>result + item.price * item.inCart,0)
+          console.log(state.totalPrice);
       }       
     },
     buySingleProduct(state, action){
       state.singleProductCart = [];
       const product = action.payload; 
       const products = state.products;
-      let index = null;
+      let productIndex = null;
 
-      products.find((item, key) => {
-        index = key;
+      products.find((item, index) => {
+        productIndex = index;
         if(item.id === product.id){
-          const varInStock = state.products[index].inStock;
-          state.products[index] = {...product, inStock: varInStock - 1};
+          state.products[productIndex].instock = product.instock--;
         }         
       })
 
       state.singleProductCart.push({...product, inCart: 1});
-      setTotalPriceAndQuantity(state);      
+      state.totalQuantity = state.cart.reduce((result, item)=>result + item.inCart,0)
+      state.totalPrice= state.cart.reduce((result, item)=>result + item.price * item.inCart,0)   
     },
     clearCart(state, action){
       state.singleProductCart = [];

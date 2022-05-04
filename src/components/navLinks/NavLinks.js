@@ -7,14 +7,24 @@ import {
     Form, 
     FormControl, 
     Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CartIcon from "../cartIcon/CartIcon";
 
 function NavLinks () {
+
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const searchedProduct = document.querySelector('.search-input').value;
+        const searchUrl = `/shop/search/${searchedProduct}`
+        navigate(searchUrl)
+    }
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">Super-Shop</Navbar.Brand>
+                <Navbar.Brand href="/">Super-Shop</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -31,14 +41,15 @@ function NavLinks () {
                     </NavDropdown>
                 </Nav>
                 </Navbar.Collapse>                
-                <Form className="d-flex">
+                <Form onSubmit={handleSearch} className="d-flex">
                     <FormControl
                         type="search"
                         placeholder="Search"
-                        className="me-2"
+                        className="me-2 search-input"
                         aria-label="Search"
+                        name="a"
                     />
-                    <Button variant="outline-success">Search</Button>
+                    <Button  type="submit" className="me-2" variant="outline-success">Search</Button>
                 </Form>
                 <CartIcon/>
             </Container>

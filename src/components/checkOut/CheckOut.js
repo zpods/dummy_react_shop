@@ -5,6 +5,7 @@ import ShopButton from '../shopButton/ShopButton';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../storeSlice/mainShopPage/mainShopPage';
 import { useNavigate } from 'react-router-dom';
+import { moveDecimal } from '../../utils/utils';
 
 function CheckOut (){
 
@@ -46,7 +47,7 @@ function CheckOut (){
                             );
                         })}                                         
                         <tr>
-                            <th colSpan={2}>Total Price: {totalPrice}</th>
+                            <th colSpan={2}>Total Price: {moveDecimal(totalPrice)}</th>
                             <th colSpan={2}>Total Quantity: {totalQuantity}</th>
                         </tr>                                                                                                  
                     </tbody>            

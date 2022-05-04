@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Card } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import ShopButton from '../shopButton/ShopButton';
 import ImageComponent from '../imageComponent/ImageComponent';
 import { addProductToCart } from '../storeSlice/mainShopPage/mainShopPage';
 import { buySingleProduct } from '../storeSlice/mainShopPage/mainShopPage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Product.module.css';
 
 function Product(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.mainShopPage.cart);
     const product = props.product;
-    const productUrl = `/products/${product.id}`;
+    const productUrl = `/shop/products/${product.id}`;
     const price = props.product.price;
     const name = props.product.name;
     const image = {name};
+    const [a,setA] = React.useState(0);
+    let inStock = useRef(null);
 
+    React.useEffect(()=>{
+        const setInStockVar = (cart) => {
+            let found = cart.find(item => item.id === product.id);
+            if(found){
+                setA(found.instock);   
+            }else{
+                setA(product.instock);
+            }           
+        }
+        setInStockVar(cart);
+    }, [cart, product] )
+    
     const handleBuySingle = (product) => {
         dispatch(buySingleProduct(product));
         navigate(`/checkout`);
@@ -38,7 +53,7 @@ function Product(props) {
                             <ShopButton onClick={()=>handleBuySingle(product)} size={'sm'} variant={"outline-secondary"} buttonText="Buy One"></ShopButton>
                             <ShopButton onClick={() => handleAddProductToCart(product)} size={'sm'} variant={"outline-secondary"} buttonText="Add To Cart" />
                         </div>
-                        <small className="text-muted">In Stock: {product.instock}</small>
+                        <small className="text-muted">In Stock: {a}</small>
                     </div>
                 </Card.Body>
             </Card>

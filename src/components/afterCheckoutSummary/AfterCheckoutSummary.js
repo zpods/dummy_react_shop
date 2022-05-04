@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { moveDecimal } from '../../utils/utils';
 
 function AfterCheckoutSummary ({props}){
 
@@ -13,7 +14,7 @@ function AfterCheckoutSummary ({props}){
                 return (
                     <Card key={key}>
                         <Card.Body>
-                            <Card.Title><div className='px-5'>Product Name:  {item.name}</div><div className='px-5'>Product Price: {item.price} </div> </Card.Title>    
+                            <Card.Title><div className='px-5'>Product Name:  {item.name}</div><div className='px-5'>Product Price: {moveDecimal(item.price)} </div> </Card.Title>    
                         </Card.Body>
                         
                     </Card>
@@ -24,7 +25,7 @@ function AfterCheckoutSummary ({props}){
             <Card>
             <Card.Body>
                 <Card.Title>
-                    <Card.Text className='px-5'>TOTAL PRICE: {totalPrice}  TOTAL QUANTITY: {totalQuantity}</Card.Text>
+                    <Card.Text className='px-5'>TOTAL PRICE: {moveDecimal(totalPrice)}  TOTAL QUANTITY: {totalQuantity}</Card.Text>
                 </Card.Title>
             </Card.Body>
             </Card>

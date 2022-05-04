@@ -1,0 +1,19 @@
+.singleProduct {
+    border-bottom: 2px solid black;
+}
+@media only screen and (max-width: 1399px) {
+    .singleProduct {
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .singleProduct {
+        height: 300px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .singleProduct {
+        height: 450px;
+        font-size: 1.6rem;
+    }
+}

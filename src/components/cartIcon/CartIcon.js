@@ -7,7 +7,7 @@ import styles from './CartIcon.module.css';
 
 function CartIcon () {
 
-    const { totalQuantity } = useSelector((state) => state.mainShopPage);
+    const totalQuantity = useSelector((state) => state.mainShopPage.totalQuantity);
     const [style, setStyle] = useState( { display: 'none' } );
 
     const handleShowCart = () => {
