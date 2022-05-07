@@ -17,16 +17,15 @@ function Product(props) {
     const price = props.product.price;
     const name = props.product.name;
     const image = {name};
-    const [a,setA] = React.useState(0);
-    let inStock = useRef(null);
+    const [productsInStock, setProductsInStock] = React.useState(0);
 
     React.useEffect(()=>{
         const setInStockVar = (cart) => {
             let found = cart.find(item => item.id === product.id);
             if(found){
-                setA(found.instock);   
+                setProductsInStock(found.instock);   
             }else{
-                setA(product.instock);
+                setProductsInStock(product.instock);
             }           
         }
         setInStockVar(cart);
@@ -53,7 +52,7 @@ function Product(props) {
                             <ShopButton onClick={()=>handleBuySingle(product)} size={'sm'} variant={"outline-secondary"} buttonText="Buy One"></ShopButton>
                             <ShopButton onClick={() => handleAddProductToCart(product)} size={'sm'} variant={"outline-secondary"} buttonText="Add To Cart" />
                         </div>
-                        <small className="text-muted">In Stock: {a}</small>
+                        <small className="text-muted">In Stock: {productsInStock}</small>
                     </div>
                 </Card.Body>
             </Card>

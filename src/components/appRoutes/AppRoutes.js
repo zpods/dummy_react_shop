@@ -9,6 +9,9 @@ import ShopPageContainer from "../shopPageContainer/ShopPageContainer";
 import CheckOut from "../checkOut/CheckOut";
 import AfterCheckoutSummary from "../afterCheckoutSummary/AfterCheckoutSummary";
 import SingleProductDetailsContainer from "../singleProductDetailsContainer/SingleProductDetailsContainer";
+import RegisterForm from "../registerForm/RegisterForm";
+import LoginForm from "../loginForm/LoginForm";
+import Logout from "../logout/Logout";
 
 export default function AppRoutes() {
     return (
@@ -20,6 +23,9 @@ export default function AppRoutes() {
             <Route path="/shop" element={<ShopPageContainer/>}></Route>  
             <Route path="/shop/search/:name" element={<SingleProductDetailsContainer/>}></Route>
             <Route path="/shop/products/:id" element={<SingleProductDetailsContainer/>}></Route>
+            <Route path="/register" element={<RegisterForm/>}></Route>
+            <Route path="/login" element={<LoginForm/>}></Route>
+            <Route path="/logout" element={<Logout/>}></Route>
         </Routes>
     );
   }

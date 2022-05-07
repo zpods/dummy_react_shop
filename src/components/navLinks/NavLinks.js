@@ -9,10 +9,12 @@ import {
     Button } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import CartIcon from "../cartIcon/CartIcon";
+import { useSelector } from 'react-redux';
 
 function NavLinks () {
 
     const navigate = useNavigate();
+    const { isAuth, email } = useSelector(state => state.loginRegisterLogout);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -31,16 +33,18 @@ function NavLinks () {
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/shop">Shop</Nav.Link>
-                    <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
-                    <Nav.Link as={Link} to="/login">Login/Register</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item as={Link} to="/aaaa">Action</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/baaa">Actionb</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item as={Link} to="/caaa">Actionc</NavDropdown.Item>
-                    </NavDropdown>
+                    
+                    { isAuth &&  <Nav.Link as={Link} to="/logout">Logout</Nav.Link> }
+                   
+                    { !isAuth && 
+                        <React.Fragment>
+                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            <Nav.Link as={Link} to="/register">Register</Nav.Link> 
+                        </React.Fragment>
+                    }
                 </Nav>
-                </Navbar.Collapse>                
+                </Navbar.Collapse>
+                { email && <div className="text-warning px-2">Logged { email }</div> }               
                 <Form onSubmit={handleSearch} className="d-flex">
                     <FormControl
                         type="search"
