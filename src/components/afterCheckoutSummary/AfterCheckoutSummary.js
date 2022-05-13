@@ -2,11 +2,16 @@ import React from 'react';
 import { Card, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { moveDecimal } from '../../utils/utils';
+import MessageComponent from '../messageComponent/MessageComponent';
 
 function AfterCheckoutSummary ({props}){
 
-    const { cart, singleProductCart, totalPrice, totalQuantity } = useSelector((state) => state.mainShopPage); 
+    const { cart, singleProductCart, totalPrice, totalQuantity, error } = useSelector((state) => state.mainShopPageAndCart); 
     let boughtProducts = singleProductCart[0] ? singleProductCart : cart;
+    const message = {
+        'title': 'ERROR',
+        'text': 'Products not bought',
+    }
 
     return (
         <Container className='py-5'>
@@ -29,9 +34,7 @@ function AfterCheckoutSummary ({props}){
                 </Card.Title>
             </Card.Body>
             </Card>
-            
-            
-            
+            { error && <MessageComponent message={message}/>}
         </Container>        
     )
 }

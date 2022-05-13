@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import CheckOut from '../checkOut/CheckOut';
 
-export default function Cart ({cartStyle, hideCart}){
+export default function Cart ({cartFromBackend, cartStyle, hideCart}){
 
     
     return (
@@ -14,7 +14,7 @@ export default function Cart ({cartStyle, hideCart}){
             }}
             onMouseLeave={() => hideCart()}
             >
-            <CheckOut/>
+            <CheckOut />
         </div>
 
     

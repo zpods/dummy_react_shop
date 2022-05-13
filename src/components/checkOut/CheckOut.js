@@ -3,24 +3,37 @@ import { useSelector } from 'react-redux';
 import { Table, Container, Row, Col } from 'react-bootstrap';
 import ShopButton from '../shopButton/ShopButton';
 import { useDispatch } from 'react-redux';
-import { clearCart } from '../storeSlice/mainShopPage/mainShopPage';
+import { clearCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
 import { useNavigate } from 'react-router-dom';
 import { moveDecimal } from '../../utils/utils';
+import { storeUserCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
+
 
 function CheckOut (){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { cart, singleProductCart, totalPrice, totalQuantity } = useSelector((state) => state.mainShopPage); 
+    const { cart, singleProductCart, totalPrice, totalQuantity } = useSelector((state) => state.mainShopPageAndCart); 
+    const isAuth = useSelector(state => state.loginRegisterLogout.isAuth);
     let i = 1;
-    let checkoutCart = singleProductCart[0] ? singleProductCart : cart;
+    let checkoutCart = singleProductCart[0] ? singleProductCart : cart ; 
 
     const handleClearCart = () => {
         dispatch(clearCart());
     }
 
     const handleCheckout =  () => { 
-        navigate('/after-checkout-summary');
+        const cartToClean = [...checkoutCart];
+        let cleanCart = [];
+        cartToClean.map((item)=>{
+            return cleanCart.push({id: item.id, inCart: item.inCart});
+        });
+        dispatch(storeUserCart(cleanCart))
+        .then( () => navigate('/after-checkout-summary') );        
+    }
+
+    const handleUserNotLoginOrRegister = () => {
+        navigate('/login');
     }
     
     return (
@@ -41,7 +54,7 @@ function CheckOut (){
                                 <tr key={item.id}>
                                     <td>{i++}</td>
                                     <td>{item.name}</td>
-                                    <td>{item.price}</td>
+                                    <td>{moveDecimal(item.price)}</td>
                                     <td>{item.inCart}</td>
                                 </tr>                  
                             );
@@ -52,10 +65,17 @@ function CheckOut (){
                         </tr>                                                                                                  
                     </tbody>            
                 </Table>
+                { isAuth && 
                 <Row >
                     <Col><ShopButton onClick={() => handleCheckout()} styleClass={'w-100'} size={'lg'} variant={'outline-dark'} buttonText="CHECKOUT"/></Col>
                     <Col><ShopButton onClick={() => handleClearCart()} styleClass={'w-100'} size={'lg'} variant={'outline-dark'} buttonText="CLEAR CART"/></Col>
-                </Row>                
+                </Row> 
+                } 
+                { !isAuth &&
+                <Row >
+                    <Col><ShopButton onClick={() => handleUserNotLoginOrRegister()} styleClass={'w-100'} size={'lg'} variant={'outline-dark'} buttonText="LOGIN OR REGISTER"/></Col>
+                </Row> 
+                }              
             </Container>
         </React.Fragment>
     )

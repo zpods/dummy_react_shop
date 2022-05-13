@@ -16,7 +16,6 @@ export default function SingleProductDetails ({product}){
                                 <Card.Body>
                                     <Card.Title className='text-center'>{item.name}</Card.Title>
                                     <Card.Text className='text-center'>{item.description}</Card.Text>
-                                    {console.log(item)}
                                     <Card.Text className='mx-4'>Price: {moveDecimal(item.price)}  InStock: {item.instock}</Card.Text>                              
                                 </Card.Body>
                             </Card>

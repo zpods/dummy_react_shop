@@ -7,7 +7,7 @@ import styles from './CartIcon.module.css';
 
 function CartIcon () {
 
-    const totalQuantity = useSelector((state) => state.mainShopPage.totalQuantity);
+    const { totalQuantity } = useSelector((state) => state.mainShopPageAndCart);
     const [style, setStyle] = useState( { display: 'none' } );
 
     const handleShowCart = () => {
@@ -27,7 +27,7 @@ function CartIcon () {
         <div className={styles.parentCart} onMouseEnter={() => handleShowCart()}>
             <div className={styles.cart}>{totalQuantity}</div>
             <FontAwesomeIcon className="p-2" icon={faCartShopping} color="white" size="2xl" />
-            <Cart cartStyle={style} hideCart={() => handleHideCart()}/>
+            <Cart  cartStyle={style} hideCart={() => handleHideCart()}/>
         </div>
     )
 }

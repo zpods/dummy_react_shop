@@ -8,7 +8,7 @@ import {
     FormControl, 
     Button } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
-import CartIcon from "../cartIcon/CartIcon";
+import CartIconContainer from "../cartIconContainer/CartIconContanier";
 import { useSelector } from 'react-redux';
 
 function NavLinks () {
@@ -55,7 +55,7 @@ function NavLinks () {
                     />
                     <Button  type="submit" className="me-2" variant="outline-success">Search</Button>
                 </Form>
-                <CartIcon/>
+                <CartIconContainer/>
             </Container>
         </Navbar>
     )
