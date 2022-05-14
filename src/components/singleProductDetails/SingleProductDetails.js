@@ -25,8 +25,8 @@ export default function SingleProductDetails ({product}){
                                 return (
                                 <Col md="4" className='p-2 h-100' key={nextKey}>
                                     <div className={styles.singleProduct}>
-                                        <ImageComponent image={image}/>
-                                        <p className='p-1'>{image.description}</p>
+                                        <ImageComponent image={false}/>
+                                        <p style={{height: 70, overflowY: 'scroll'}} className='p-1'>{image.description}</p>
                                     </div>
                                 </Col>
                                 );
