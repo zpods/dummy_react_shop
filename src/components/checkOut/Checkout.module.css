@@ -1,0 +1,29 @@
+.cartSizeAndPosition {
+    width: 40vw;
+    position: absolute;
+    top: 30px;
+    left: -600px;
+    z-index: 1001;
+}
+.buttonSize {
+    height:75px;
+    width: 100%;    
+}
+
+@media screen and (max-width: 900px){
+    .cartSizeAndPosition {
+        width: 50vw;
+        top: 30px;
+        left: 100px;
+        z-index: 1001;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .cartSizeAndPosition {
+        width: 90vw;
+        position: absolute;
+        top: 39px;
+        left: -165px;
+    }
+}

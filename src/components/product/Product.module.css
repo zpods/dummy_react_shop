@@ -1,6 +1,12 @@
 .description {
     height: 180px;
     overflow-y: scroll !important;
+    margin-right: 0px;
+    padding-right: 10px;
+}
+
+.cartBodyPadding {
+    padding-right: 0px !important;
 }
 
 @media screen and (min-width: 1200px){

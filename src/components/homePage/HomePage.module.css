@@ -1,3 +1,9 @@
 .imageCarousel {
     height: 40vh;
 }
+
+@media screen and (min-width: 660px){
+    .imageCarousel {
+        height: 70vh;
+    }
+}

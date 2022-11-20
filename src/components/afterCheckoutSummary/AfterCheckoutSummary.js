@@ -8,10 +8,6 @@ function AfterCheckoutSummary ({props}){
 
     const { cart, singleProductCart, totalPrice, totalQuantity, error } = useSelector((state) => state.mainShopPageAndCart); 
     let boughtProducts = singleProductCart[0] ? singleProductCart : cart;
-    const message = {
-        'title': 'ERROR',
-        'text': 'Products not bought',
-    }
 
     return (
         <Container className='py-5'>
@@ -34,7 +30,7 @@ function AfterCheckoutSummary ({props}){
                 </Card.Title>
             </Card.Body>
             </Card>
-            { error && <MessageComponent message={message}/>}
+            { error && <MessageComponent/>}
         </Container>        
     )
 }

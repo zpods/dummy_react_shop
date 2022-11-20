@@ -1,0 +1,137 @@
+.navBrandSearch {
+    display: flex;
+    margin-right: 70px;
+ }  
+
+ .loggedUser {
+    position: absolute;
+    right: 480px;
+    width: 200px;
+    text-align: end;
+    color: burlywood;
+}
+
+@media screen and (min-width: 1400px){
+    .loggedUser {
+        right: 700px;        
+    }
+}
+
+@media screen and (max-width: 884px){
+    .navBrandSearch {
+        position: absolute;
+        top: 0px;
+        left: 100px;
+        margin-top: 10px;
+        margin-right: 10px;
+        display: flex;
+        width: 500px;
+    }   
+    .parent {
+        position: relative;
+        padding-top: 50px;
+        z-index: 10001;
+        height: 100px;
+    }
+    .navBrandButton {
+        position: absolute;
+        top: 58px;
+        padding-top: 10px;
+    }
+    .navToggleButton{ 
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-top: 10px;
+        margin-left: 15px;
+        z-index: 999;
+    }
+    .menu {
+        position: absolute;
+        left: 0px;
+        top: 108px;
+        background-color: #212529;
+        padding-left: 25px;
+        padding-bottom: 10px;
+        z-index: 999;
+        width: 80vw;
+        height: 270px;
+        color: antiquewhite;
+        font-size: 1.5rem;
+    }
+    .collapse:not(.show) {
+        transition: height 0.5s, ease-out 0.5s;
+    }    
+    form > input.me-2.search-input.form-control {
+        min-width: 200%; 
+    }
+    .loggedUser {
+        position: absolute;
+        top: 72px;
+        right: 180px;
+        width: 200px;
+        text-align: end;
+        color: burlywood;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .navBrandSearch {
+        position: absolute;
+        top: 0px;
+        left: 90px;
+        margin-top: 10px;
+        margin-right: 5px;
+        display: flex;
+        width: 265px;
+    }   
+    .parent {
+        position: relative;
+        padding-top: 50px;
+        z-index: 10001;
+        height: 100px;
+        
+    }
+    .navBrandButton {
+        position: absolute;
+        top: 58px;
+        padding-top: 10px;
+    }
+    .navToggleButton{ 
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-top: 10px;
+        margin-left: 15px;
+        z-index: 999;
+    }
+    .menu {
+        position: absolute;
+        left: 0px;
+        top: 108px;
+        background-color: #212529;
+        padding-left: 25px;
+        padding-bottom: 10px;
+        z-index: 999;
+        width: 100vw;
+        height: 270px;
+        color: antiquewhite;
+        font-size: 1.5rem;
+    }
+    .collapse:not(.show) {
+        transition: height 0.5s, ease-out 0.5s;
+    }    
+    
+    .loggedUser {
+        position: absolute;
+        top: 72px;
+        right: 80px;
+        width: 200px;
+        text-align: end;
+        color: burlywood;
+    }
+}

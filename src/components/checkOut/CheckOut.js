@@ -7,16 +7,18 @@ import { clearCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart
 import { useNavigate } from 'react-router-dom';
 import { moveDecimal } from '../../utils/utils';
 import { storeUserCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
+import styles from './Checkout.module.css';
+
 
 
 function CheckOut (){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { cart, singleProductCart, totalPrice, totalQuantity } = useSelector((state) => state.mainShopPageAndCart); 
+    const { cart, totalPrice, totalQuantity } = useSelector((state) => state.mainShopPageAndCart); 
     const isAuth = useSelector(state => state.loginRegisterLogout.isAuth);
     let i = 1;
-    let checkoutCart = singleProductCart[0] ? singleProductCart : cart ; 
+    let checkoutCart = cart ; 
 
     const handleClearCart = () => {
         dispatch(clearCart());
@@ -37,12 +39,12 @@ function CheckOut (){
     }
     
     return (
-        <React.Fragment>
-            <Container className="border border-dark p-2 bg-light w-100 mt-5">
-                <Table variant="dark">                
+        <div className={styles.cartSizeAndPosition}>  
+        <Container className="border border-dark p-2 bg-light mt-4 " >           
+                <Table  variant="dark">                
                     <thead>
                         <tr>
-                            <th className='w-25'>#</th>
+                            <th >#</th>
                             <th className='w-25'>Product</th>
                             <th className='w-25'>Price</th>
                             <th className='w-25'>Quantity</th>
@@ -67,17 +69,18 @@ function CheckOut (){
                 </Table>
                 { isAuth && 
                 <Row >
-                    <Col><ShopButton onClick={() => handleCheckout()} styleClass={'w-100'} size={'lg'} variant={'outline-dark'} buttonText="CHECKOUT"/></Col>
-                    <Col><ShopButton onClick={() => handleClearCart()} styleClass={'w-100'} size={'lg'} variant={'outline-dark'} buttonText="CLEAR CART"/></Col>
+                    <Col><ShopButton onClick={() => handleCheckout()} styleClass={styles.buttonSize} size={'lg'} variant={'outline-dark'} buttonText="CHECKOUT"/></Col>
+                    <Col><ShopButton onClick={() => handleClearCart()} styleClass={styles.buttonSize} size={'lg'} variant={'outline-dark'} buttonText="CLEAR CART"/></Col>
                 </Row> 
                 } 
                 { !isAuth &&
                 <Row >
-                    <Col><ShopButton onClick={() => handleUserNotLoginOrRegister()} styleClass={'w-100'} size={'lg'} variant={'outline-dark'} buttonText="LOGIN OR REGISTER"/></Col>
+                    <Col><ShopButton onClick={() => handleUserNotLoginOrRegister()} styleClass={styles.buttonSize} size={'lg'} variant={'outline-dark'} buttonText="SIGN IN"/></Col>
+                    <Col><ShopButton onClick={() => handleClearCart()} styleClass={styles.buttonSize} size={'lg'} variant={'outline-dark'} buttonText="CLEAR CART"/></Col>
                 </Row> 
-                }              
-            </Container>
-        </React.Fragment>
+                }                 
+        </Container>  
+        </div>     
     )
 }
 export default CheckOut;

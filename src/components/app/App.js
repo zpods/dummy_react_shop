@@ -3,18 +3,28 @@ import AppRoutes from '../appRoutes/AppRoutes';
 import NavLinks from "../navLinks/NavLinks";
 import Footer from "../footer/Footer";
 import { BrowserRouter as Router } from 'react-router-dom';
-import history from '../history/history';
-import styles from './App.module.css';
+import './App.css';
+
+
 
 function App() {
-  return (
-    <div className={styles.body}>     
-      <Router history={history}>
-        <NavLinks/>
+
+  const handleClick = () => {
+      const navBar = document.getElementById("basic-navbar-nav");
+      navBar.classList.add('animateCloseNavbar');
+      setTimeout(() => {
+        navBar.classList.remove('show');
+      },281);
+  }
+ 
+  return (   
+    <Router >
+      <NavLinks/>
+      <div onClick={() => handleClick()}>
         <AppRoutes/>
         <Footer/>
-      </Router>
-    </div> 
+      </div>        
+    </Router>
   );
 }
 

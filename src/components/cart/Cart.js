@@ -1,20 +1,16 @@
 import React  from 'react';
-import CheckOut from '../checkOut/CheckOut';
+import Checkout from '../checkOut/CheckOut';
 
-export default function Cart ({cartFromBackend, cartStyle, hideCart}){
+export default function Cart ({cartStyle, hideCartAndShow}){
 
-    
     return (
         <div style={{
             display: cartStyle.display,
-            width: cartStyle.width, 
-            position: cartStyle.position, 
-            right: cartStyle.right,
-            top: cartStyle.top 
+            zIndex: cartStyle.zIndex,
             }}
-            onMouseLeave={() => hideCart()}
+            onClick={() => hideCartAndShow()}
             >
-            <CheckOut />
+        <Checkout/>
         </div>
 
     

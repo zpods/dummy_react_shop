@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Carousel, Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ImageComponent from '../imageComponent/ImageComponent';
 import  styles from './HomePage.module.css';
+import { useDispatch } from 'react-redux';
+import { localStorageCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
 
 function HomePage () {
 
+  const dispatch = useDispatch();
   const imageCarousel = styles.imageCarousel + ' d-block w-100';
   const imageHeading = { 
     style: {borderRadius: "50%", width: "140px", height: "140px"},
@@ -20,9 +23,13 @@ function HomePage () {
     dataHolderRendered: "true",
   }
 
+  useEffect(() => {
+    dispatch(localStorageCart());
+  }, [dispatch])
+
     return (
-      <React.Fragment>
-        <Carousel className='mb-5'>
+      <div className={styles.carouselMargin}>
+        <Carousel className='mb-5 h-50'>
           <Carousel.Item >
             <img
               className={imageCarousel}
@@ -55,7 +62,7 @@ function HomePage () {
             />
             <Carousel.Caption className='text-left'>
               <h3>Third slide label</h3>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id .</p>
               <p><Link className="btn btn-lg btn-primary" to="/register" role="button">Sign up today</Link></p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -113,7 +120,7 @@ function HomePage () {
           </Row>
           <hr></hr>
         </Container>
-      </React.Fragment>
+      </div>
     );
 }
 

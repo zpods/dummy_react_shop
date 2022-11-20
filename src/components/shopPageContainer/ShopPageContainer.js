@@ -1,28 +1,21 @@
-import React from 'react';
-import { fetchProducts, clearCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
-import { useDispatch, useSelector } from 'react-redux';
-import ShopPage from '../shopPage/ShopPage';
-import MessageComponent from '../messageComponent/MessageComponent';
+import React, { useEffect } from "react";
+import { fetchProducts } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
+import { useDispatch, useSelector } from "react-redux";
+import ShopPage from "../shopPage/ShopPage";
+import MessageComponent from "../messageComponent/MessageComponent";
 
-function ShopPageContainer (){
+export default function ShopPageContainer (){ 
+
     const dispatch = useDispatch();
+    const { products, isLoading, error } = useSelector(state => state.mainShopPageAndCart);
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(fetchProducts());
-        dispatch(clearCart());
     },[dispatch]);
-
-    const { isLoading, products } = useSelector( (state) => state.mainShopPageAndCart);
-    const message = {
-        title: 'LOADING...',
-        text: false,
-    }
-    const spinner = true;
     
-    if(isLoading){
-        return <MessageComponent spinner={spinner} message={message}/>
-    }else{
-        return (<ShopPage products={products}/>);
+    if(error){
+        return <MessageComponent/>
     }
+
+    return (<ShopPage products={products} isLoading={isLoading}/>);
 }
-export default ShopPageContainer;

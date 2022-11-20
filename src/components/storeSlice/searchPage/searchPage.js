@@ -23,20 +23,22 @@ export const searchPageSlice = createSlice({
   name: 'searchPage',
   initialState: {
     searchedProduct: null,
-    isLoading: true,
-    error: [],
+    searchIsLoading: false,
+    searchError: null,
   },
   reducers: {
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSearchedProduct.fulfilled, (state, action) => {
       state.searchedProduct = action.payload;
-      state.isLoading = false
+      state.searchIsLoading = false;
+      state.searchError = null;
     }).addCase(fetchSearchedProduct.pending, (state, action) => {
-        state.isLoading = true;
+        state.searchIsLoading = true;
+        state.searchError = 'Loading'
     }).addCase(fetchSearchedProduct.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action;
+        state.searchIsLoading = false;
+        state.searchError = 'Connection Error';
     });
   },
 })

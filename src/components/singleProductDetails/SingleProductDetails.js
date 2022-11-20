@@ -6,6 +6,20 @@ import { moveDecimal } from '../../utils/utils';
 
 export default function SingleProductDetails ({product}){
 
+    if(product && product.length <= 0){
+        return (
+            <Container>
+                <Col md="12">
+                    <Card className='mt-5'>
+                        <Card.Body>
+                            <Card.Title className='text-center'>Product Not Found</Card.Title>                        
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Container>
+        )     
+    }
+
     return (
         <Container>        
             {product && product.map((item, key) => {
@@ -26,7 +40,7 @@ export default function SingleProductDetails ({product}){
                                 <Col md="4" className='p-2 h-100' key={nextKey}>
                                     <div className={styles.singleProduct}>
                                         <ImageComponent image={false}/>
-                                        <p style={{height: 70, overflowY: 'scroll'}} className='p-1'>{image.description}</p>
+                                        <p className={styles.singleProductParagraph}>{image.description}</p>
                                     </div>
                                 </Col>
                                 );

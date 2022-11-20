@@ -7,15 +7,10 @@ import MessageComponent from '../messageComponent/MessageComponent';
 
 export default function SingleProductDetailsContainer () {
     
-    const isLoading = useSelector(state => state.searchPage.isLoading);
+    const { searchError, searchIsLoading } = useSelector(state => state.searchPage);
     const dispatch = useDispatch();
     const { name, id } = useParams();
     let searchedData = null
-    const message = {
-        title: 'LOADING...',
-        text: 'Loading Searched Product Data',
-    }
-    const spinner = true;
 
     if(id){
         searchedData = id;
@@ -29,10 +24,10 @@ export default function SingleProductDetailsContainer () {
         dispatch(fetchSearchedProduct(searchedData));
     },[searchedData, dispatch])
 
-    if(isLoading){
-        return <MessageComponent spinner={spinner} message={message}/>
+    if(searchError || searchIsLoading){
+        return <MessageComponent/>
     }
-
+console.log(searchedProduct);
     return(
         <SingleProductDetails product={searchedProduct}/>
     );

@@ -5,11 +5,12 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { registerUser } from '../storeSlice/loginRegisterLogout/loginRegisterLogout';
 import { useNavigate } from 'react-router';
+import MessageComponent from '../messageComponent/MessageComponent';
 
 
 export default function RegisterForm() {
 
-    const { isAuth, error } = useSelector(state => state.loginRegisterLogout);
+    const { isAuth, logRegError } = useSelector(state => state.loginRegisterLogout);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -145,14 +146,7 @@ export default function RegisterForm() {
                     </Row>      
                     
                 </Form>        
-                { error 
-                && 
-                <Card className="mt-4 ">
-                    <Card.Body>
-                        <Card.Text className="d-flex justify-content-center text-danger">Error Try Again In A While</Card.Text>
-                    </Card.Body>
-                </Card>
-                }
+                { logRegError && <MessageComponent/>}
             </Container>       
             )}
     </Formik>

@@ -80,56 +80,63 @@ export const loginRegisterLogoutSlice = createSlice({
     name: 'loginRegisterLogout',
     initialState: {
         isAuth: false,
-        isLoading: true,
+        logRegIsLoading: false,
         userEmail: null,
         userId: null,
         token: null,
         email: null,
+        logRegError: null,
     },
     reducers: {        
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.isAuth = true;
-            state.isLoading = false
+            state.logRegIsLoading = false
             state.token = action.payload.token;
             state.email = action.payload.user.email;
+            state.logRegError = null;
             setToken(state.token);
         }).addCase(loginUser.pending, (state) => {
-            state.isLoading = true;
-            state.isAuth = false
-        }).addCase(loginUser.rejected, (state, action) => {
-            state.isLoading = false;
+            state.logRegIsLoading = true;
             state.isAuth = false;
-            state.error = action;
+            state.logRegError = 'Loading';
+        }).addCase(loginUser.rejected, (state, action) => {
+            state.logRegIsLoading = false;
+            state.isAuth = false;
+            state.logRegError = 'Bad Credentials';
         });
         builder.addCase(registerUser.fulfilled, (state, action) => {
             state.isAuth = true;
-            state.isLoading = false
+            state.logRegIsLoading = false
             state.token = action.payload.token;
             state.email = action.payload.user.email;
+            state.logRegError = null;
             setToken(state.token);
         }).addCase(registerUser.pending, (state) => {
-            state.isLoading = true;
-            state.isAuth = false
-        }).addCase(registerUser.rejected, (state, action) => {
-            state.isLoading = false;
+            state.logRegIsLoading = true;
             state.isAuth = false;
-            state.error = action;
+            state.logRegError = 'Loading';
+        }).addCase(registerUser.rejected, (state, action) => {
+            state.logRegIsLoading = false;
+            state.isAuth = false;
+            state.logRegError = 'Register Error';
         });
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             state.isAuth = false;
-            state.isLoading = false
+            state.logRegIsLoading = false
             state.token = null;
             state.email = null;
+            state.logRegError = null;
             setToken(state.token);
         }).addCase(logoutUser.pending, (state) => {
-            state.isLoading = true;
-            state.isAuth = false
+            state.logRegIsLoading = true;
+            state.isAuth = false;
+            state.logRegError = 'Loading';
         }).addCase(logoutUser.rejected, (state, action) => {
-            state.isLoading = false;
+            state.logRegIsLoading = false;
             state.isAuth = true;
-            state.error = action;
+            state.logRegError = 'Logout Error';
         });
     },
 })

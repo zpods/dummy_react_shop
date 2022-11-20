@@ -5,6 +5,7 @@ import mainShopPageAndCart from "./components/storeSlice/mainShopPageAndCart/mai
 import searchPage from "./components/storeSlice/searchPage/searchPage";
 import loginRegisterLogout from './components/storeSlice/loginRegisterLogout/loginRegisterLogout';
 
+
 const reducers = combineReducers({
     loginRegisterLogout,
     mainShopPageAndCart,

@@ -1,39 +1,46 @@
-import React from 'react';
-import { Row, Container } from 'react-bootstrap';
-import JumbotronElement from '../jumbotronElement/JumbotronElement';
-import Product from '../product/Product';
+import React, {useState, useMemo } from 'react';
 import MessageComponent from '../messageComponent/MessageComponent';
+import Paginator from '../Paginator/Paginator';
+import JumbotronElement from '../jumbotronElement/JumbotronElement';
+import { Container, Row,  } from 'react-bootstrap';
+import Product from '../product/Product';
 
-function ShopPage({products}) {
 
-    const message = {
-        title: 'Error Message',
-        text: 'NO PRODUCT FOUND'
+function ShopPage ({products, isLoading}){
+
+    let pageItemsSize = 12;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * pageItemsSize;
+        const lastPageIndex = firstPageIndex + pageItemsSize;
+        return products.slice(firstPageIndex, lastPageIndex);
+      }, [currentPage, products]);
+   
+    if(isLoading){
+        return <MessageComponent/>
     }
-
-    if(Array.isArray(products) && products.length === 0){
-        return (
-            <React.Fragment>
-                <JumbotronElement/>
-                <MessageComponent message={message}/>
-            </React.Fragment>            
-        )
-    }
+    
     return (
-        <React.Fragment>
-            <Container>
-                <JumbotronElement/>
-                <Row>                
-                { products && products.map((product) => {
-                    return (
-                    <div className='col-md-6 col-lg-3 ' key={product.id}>
-                        <Product product={product}/>
-                    </div>
-                    )
-                })}
-                </Row>
-            </Container>
-        </React.Fragment>               
-    );
+        <Container>
+            <JumbotronElement/>
+            <Row>                
+            { currentTableData && currentTableData.map((product) => {
+                return (
+                <div className='col-md-6 col-lg-3 ' key={product.id}>
+                    <Product product={product}/>
+                </div>
+                )
+            })}
+            </Row>
+            <Paginator
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={products.length}
+                pageSize={pageItemsSize}
+                onPageChange={page => setCurrentPage(page)}
+            />
+        </Container>            
+    );   
 }
 export default ShopPage;

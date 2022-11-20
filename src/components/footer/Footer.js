@@ -5,7 +5,7 @@ import { faCoffee, faCreditCardAlt, faFaceKissBeam, faGaugeSimpleHigh, faRandom,
 
 function Footer (){
     return (
-        <footer className="text-center text-white" style={{backgroundColor: "purple"}}>   
+        <footer className="text-center text-white vw-100" style={{backgroundColor: "purple"}}>   
             <div className="container">      
                 <section className="mt-5">        
                     <div className="row text-center d-flex justify-content-center pt-5">          
@@ -46,27 +46,26 @@ function Footer (){
                 </section>     
                 <section className="text-center mb-5">
                     <Link to="/" className="text-white me-4">
-                    <FontAwesomeIcon icon={faCoffee} />
-
+                        <FontAwesomeIcon icon={faCoffee} />
                     </Link>
                     <Link to="/" className="text-white me-4">
-                    <FontAwesomeIcon icon={faCreditCardAlt} />
+                        <FontAwesomeIcon icon={faCreditCardAlt} />
                     </Link>
                     <Link to="/" className="text-white me-4">
-                    <FontAwesomeIcon icon={faFaceKissBeam} />
+                        <FontAwesomeIcon icon={faFaceKissBeam} />
                     </Link>
                     <Link to="/" className="text-white me-4">
-                    <FontAwesomeIcon icon={faGaugeSimpleHigh} />
+                        <FontAwesomeIcon icon={faGaugeSimpleHigh} />
                     </Link>
                     <Link to="/" className="text-white me-4">
-                    <FontAwesomeIcon icon={faRandom} />
+                        <FontAwesomeIcon icon={faRandom} />
                     </Link>
                     <Link to="/" className="text-white me-4">
-                    <FontAwesomeIcon icon={faAnchorCircleExclamation} />
+                        <FontAwesomeIcon icon={faAnchorCircleExclamation} />
                     </Link>
                 </section>      
             </div>
-            <div className="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
+            <div className="text-center p-3 vw-100" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
                 © 2022 Copyright: 
             </div>  
         </footer>

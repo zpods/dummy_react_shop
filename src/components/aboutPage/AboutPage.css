@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap+Condensed:ital@0;1&display=swap');
+.projectText, .projectText ~ p {
+    list-style-type: none;
+    font-family: 'Asap+Condensed';
+    font-size: 1.3rem;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.textTitle {
+    list-style-type: disc;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 40px;
+    font-family: 'Asap+Condensed';
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
