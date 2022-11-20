@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+## title
+MySimpleShop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## motivation
+I built this project to prove i am able to make simple shop using Reactjs and show my skills.
 
-## Available Scripts
+## framework and libraries
+This Reactjs application was built with following libraries:
+React 17.0.2, axios, bootstrap, classnames, formik, redux, redux-thunk, react-redux, react-router, react-router-dom, react-bootstrap, node-sass, cra-sass.
 
-In the project directory, you can run:
+## features
+    The application follows the REST API principle. It means is connected with the backend using REST API.
+    At the top of the page is located a navigation bar with four links to choose from: Home, About, Shop, Login, and Register. On the right side of the page after mentioned links, you can find search input and a cart icon showing the number of products set in the cart. If you type product name in search input, it shows all descriptions and of all images belonging to the particular item.
+    The home page was built using the bootstrap example template, all features (e.g carousel, grid) were created using a react-bootstrap library with bootstrap 5 capabilities.
 
-### `npm start`
+    About Page contains the description of the page.
+    The shop page contains a shop with a jumbotron at the top of the site and products displayed below the jumbotron. All items are organized using custom pagination with 12 items on one page.
+    Every product has an image with a price visible on it and hidden on hover also a title on the right side of the image and below it, a short description, when the description is too long content is fitted using a custom scroll.
+    Below these elements "Add To Cart" button and "In Stock" value is found.
+    The button enables adding products to the cart, the value shows the number of available products.
+    When "Add To Cart" is clicked "In Stock" variable is decreased until reaches 0, thus no longer products can be added to the cart.
+    The cart is saved in local storage and is restored after refresh.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    The cart can also be preserved in the backend when a user is logged.
+    After logout and logging in again, the cart is retrieved from the backend.
+    Storing data in the backend (in my example Laravel app) is done by clicking the "CHECKOUT" button.
+    Clicking "Add To Cart" changes the "In Stock" value that shows the number of available products and is decreased to reach 0 when no more products can be added.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    At the same time, the total quantity shown on the cart icon is updated accordingly.
+    Hover over the cart icon to display a small window containing a table with the total number of selected products, product name, price of a single product, and the total number of all items in the basket, also total price and total quantity are placed below the table.
+    When the user is not login, the button displays a prompt to sign in, and the next button allows to clear the cart stored in local storage.
+    To clear the cart in local storage and on the backend user should click the buttons "CLEAR CART" and next "CHECKOUT".
+    Login and Register pages are only visible when the user is not login.
+    Both pages were built with the Formik library and have the following features: when the user name is too short, the password is too short, email is in not allowed format (not an email), two password fields on the registration form are not equal then prompts in red are shown with correct messages to help user pass login or register part of the app. When logging in, registering or logout failed at the backend general message is shown.
 
-### `npm test`
+    The logout link is visible only when the user is logged in.
+    Clicking it also causes logout not only in the front but also at the backend part of the app.
+    The whole visual part of the app was built thanks to the Bootstrap 5 library according to Responsive Web Design rules.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    
