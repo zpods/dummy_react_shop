@@ -10,6 +10,12 @@
     width: 100%;    
 }
 
+@media screen and (min-width: 1400px){
+    .cartSizeAndPosition {
+        left: -670px;
+    }
+}
+
 @media screen and (max-width: 900px){
     .cartSizeAndPosition {
         width: 50vw;
