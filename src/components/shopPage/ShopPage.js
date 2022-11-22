@@ -15,7 +15,7 @@ function ShopPage ({products, isLoading}){
         const firstPageIndex = (currentPage - 1) * pageItemsSize;
         const lastPageIndex = firstPageIndex + pageItemsSize;
         return products.slice(firstPageIndex, lastPageIndex);
-      }, [currentPage, products]);
+      }, [currentPage, products, pageItemsSize]);
    
     if(isLoading){
         return <MessageComponent/>

@@ -27,7 +27,7 @@ export default function SingleProductDetailsContainer () {
     if(searchError || searchIsLoading){
         return <MessageComponent/>
     }
-console.log(searchedProduct);
+
     return(
         <SingleProductDetails product={searchedProduct}/>
     );

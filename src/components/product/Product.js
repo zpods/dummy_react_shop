@@ -1,14 +1,13 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ShopButton from '../shopButton/ShopButton';
 import ImageComponent from '../imageComponent/ImageComponent';
-import { addProductToCart, buySingleProduct } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
+import { addProductToCart } from '../storeSlice/mainShopPageAndCart/mainShopPageAndCart';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Product.module.css';
 
 function Product(props) {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector(state => state.mainShopPageAndCart.cart);
     

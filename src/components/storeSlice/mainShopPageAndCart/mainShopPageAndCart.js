@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { token } from '../loginRegisterLogout/loginRegisterLogout';
 import { SITE_URL } from '../../../constants/constants';
-import {current} from 'immer'
 
 /**
  * axios call to fetch  shop products from backend
@@ -227,7 +226,6 @@ export const mainShopPageSlice = createSlice({
         state.isLoading = true;
         state.error = 'Loading';
     }).addCase(fetchProducts.rejected, (state, action) => {
-      console.log(action.payload);
         state.isLoading = false;
         state.error = 'Connection Error';
     });
